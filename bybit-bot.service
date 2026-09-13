@@ -1,0 +1,78 @@
+# ==============================================================================
+#  systemd unit file — Bybit Trading Bot
+#
+#  GUARANTEES:
+#    ✓ Bot starts automatically every time the droplet boots
+#    ✓ Bot restarts automatically if it crashes (indefinitely, no burst limit)
+#    ✓ Bot waits for network before starting (avoids startup failures)
+#
+#  Install manually (if not using setup.sh):
+#    sudo cp bybit-bot.service /etc/systemd/system/
+#    sudo systemctl daemon-reload
+#    sudo systemctl enable bybit-bot    ← makes it start on boot
+#    sudo systemctl start  bybit-bot    ← starts it right now
+#
+#  Verify auto-start is on:
+#    sudo systemctl is-enabled bybit-bot   ← should print "enabled"
+# ==============================================================================
+
+[Unit]
+Description=Bybit Derivatives Trading Bot
+Documentation=file:///opt/bybit_bot/README.md
+
+# Wait until the network stack is fully up before starting.
+# Without this the bot may launch before the internet is reachable,
+# fail to connect to Bybit, and start crash-looping.
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=botuser
+Group=botuser
+WorkingDirectory=/opt/bybit_bot
+
+# Load API keys and config from .env (never hardcode credentials here)
+EnvironmentFile=/opt/bybit_bot/.env
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONPATH=/opt/bybit_bot
+
+# The main bot process
+ExecStart=/opt/bybit_bot/venv/bin/python main.py --mode live
+
+# ── Auto-restart policy ───────────────────────────────────────────────────────
+# Restart=always  → restart regardless of how the process exited:
+#   crash, unhandled exception, OOM kill, SIGTERM, clean exit — all restarted.
+Restart=always
+
+# Wait 15 seconds before restarting.
+# Prevents hammering Bybit API or the system if there's a boot-time error.
+RestartSec=15
+
+# StartLimitIntervalSec=0 disables the burst limit completely.
+# By default systemd stops restarting after 5 failures in 10 seconds.
+# We remove that cap so the bot ALWAYS comes back, no matter what.
+StartLimitIntervalSec=0
+
+# Log to systemd journal (read with: journalctl -u bybit-bot -f)
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=bybit-bot
+
+# ── Security hardening ────────────────────────────────────────────────────────
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+# Bot must write to logs/ and data/ — everything else is read-only
+ReadWritePaths=/opt/bybit_bot/logs /opt/bybit_bot/data
+
+[Install]
+# multi-user.target = normal Debian/Ubuntu boot runlevel.
+# This line is what makes `systemctl enable` work —
+# it creates a symlink so this unit starts on every boot.
+WantedBy=multi-user.target

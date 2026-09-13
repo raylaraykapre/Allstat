@@ -1,0 +1,57 @@
+MIT License with Additional Restrictions
+
+Copyright (c) 2026 Ray (Allstat)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+1. The above copyright notice and this permission notice shall be included in
+   all copies or substantial portions of the Software.
+
+2. PROHIBITED USES — The Software SHALL NOT be used, in whole or in part, for:
+   a) Any form of fraud, financial fraud, market manipulation, wash trading,
+      spoofing, or any activity that constitutes illegal trading practice;
+   b) Money laundering, financing of terrorism, or any activity prohibited
+      under applicable financial crime legislation;
+   c) Circumventing, violating, or evading any applicable law, regulation,
+      or the terms of service of any exchange or financial platform;
+   d) Any unauthorized access to systems, accounts, or data belonging to
+      third parties.
+   Violation of this clause immediately and automatically terminates all
+   rights granted under this license.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+THE AUTHOR AND COPYRIGHT HOLDER EXPRESSLY DISCLAIM ALL LIABILITY FOR:
+  - Any financial losses, trading losses, or loss of capital arising from
+    the use of this Software;
+  - The accuracy, completeness, or fitness for purpose of any trading
+    strategy, signal, backtest result, or output produced by this Software;
+  - Any damages, direct or indirect, resulting from reliance on this Software
+    for actual trading or investment decisions;
+  - The performance of any third-party exchange API, network, or service
+    that this Software connects to.
+
+USE OF THIS SOFTWARE FOR LIVE TRADING IS ENTIRELY AT THE USER'S OWN RISK.
+
+THIRD-PARTY INTELLECTUAL PROPERTY NOTICES:
+  - "Bollinger Bands" is a registered trademark of John Bollinger /
+    Capital Growth Letter Inc. (USPTO Reg. No. 3,990,957). This Software
+    does not use that trademark as a product name and claims no affiliation
+    with or endorsement by John Bollinger.
+  - "TTM Squeeze" is a commercial indicator associated with Simpler Trading
+    / John Carter. This Software does not use that name and is not
+    affiliated with Simpler Trading.
+  - All trading indicator formulas implemented in this Software are
+    mathematical methods in the public domain. See CREDITS.md for the
+    full compliance assessment.
